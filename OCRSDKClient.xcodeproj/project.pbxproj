@@ -52,7 +52,8 @@
 		0AE8EC73174D388D007E6365 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0AE8EC75174D388D007E6365 /* OCRSDKClientTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCRSDKClientTests.h; sourceTree = "<group>"; };
 		0AE8EC76174D388D007E6365 /* OCRSDKClientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCRSDKClientTests.m; sourceTree = "<group>"; };
-		1AE8846779E04AC399F65F8D /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		30568A8C396E993DEF370611 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		4142DA58D4B14667CA0EC3E0 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		AC7BFDA1168848459332CC68 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -79,6 +80,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		06FB9C6D8BEEF570EC512F6C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4142DA58D4B14667CA0EC3E0 /* Pods.debug.xcconfig */,
+				30568A8C396E993DEF370611 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		0AE8EC4C174D388D007E6365 = {
 			isa = PBXGroup;
 			children = (
@@ -86,7 +96,7 @@
 				0AE8EC6F174D388D007E6365 /* Tests */,
 				0AE8EC57174D388D007E6365 /* Frameworks */,
 				0AE8EC56174D388D007E6365 /* Products */,
-				1AE8846779E04AC399F65F8D /* Pods.xcconfig */,
+				06FB9C6D8BEEF570EC512F6C /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -177,7 +187,7 @@
 			name = OCRSDKClientTests;
 			productName = OCRSDKClientTests;
 			productReference = 0AE8EC66174D388D007E6365 /* OCRSDKClientTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -257,7 +267,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -355,7 +365,7 @@
 		};
 		0AE8EC7B174D388D007E6365 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1AE8846779E04AC399F65F8D /* Pods.xcconfig */;
+			baseConfigurationReference = 4142DA58D4B14667CA0EC3E0 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/OCRSDKClient.dst;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -365,7 +375,7 @@
 		};
 		0AE8EC7C174D388D007E6365 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1AE8846779E04AC399F65F8D /* Pods.xcconfig */;
+			baseConfigurationReference = 30568A8C396E993DEF370611 /* Pods.release.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/OCRSDKClient.dst;
 				PRODUCT_NAME = "$(TARGET_NAME)";

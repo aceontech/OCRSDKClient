@@ -116,15 +116,30 @@ static NSString * const kOCRSDKInstallationActivated = @"com.abbyy.ocrsdk.instal
 }
 
 - (void)startTaskWithImageData:(NSData *)imageData
-					withParams:(NSDictionary *)processingParams
-				 progressBlock:(void (^)(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite))progressBlock
-					   success:(void (^)(NSDictionary *taskInfo))success
-					   failure:(void (^)(NSError *error))failure
+    withParams:(NSDictionary *)processingParams
+    progressBlock:(void (^)(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite))progressBlock
+    success:(void (^)(NSDictionary *taskInfo))success
+    failure:(void (^)(NSError *error))failure
+{
+    [self startTaskWithPath:@"processImage"
+        imageData:imageData
+        withParams:processingParams
+        progressBlock:progressBlock
+        success:success
+        failure:failure];
+}
+
+- (void)startTaskWithPath:(NSString *)path
+    imageData:(NSData *)imageData
+    withParams:(NSDictionary *)processingParams
+    progressBlock:(void (^)(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite))progressBlock
+    success:(void (^)(NSDictionary *taskInfo))success
+    failure:(void (^)(NSError *error))failure
 {
 	NSParameterAssert(imageData);
 	
 	// Create a GET request to make AFHTTPClient set params to url
-	NSMutableURLRequest *request = [self requestWithMethod:@"GET" path:@"processImage" parameters:processingParams];
+	NSMutableURLRequest *request = [self requestWithMethod:@"GET" path:path parameters:processingParams];
 	[request setHTTPMethod:@"POST"];
 	[request setValue:@"applicaton/octet-stream" forHTTPHeaderField:@"Content-Type"];
 	[request setHTTPBody:imageData];
