@@ -107,6 +107,14 @@
 				 progressBlock:(void (^)(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite))progressBlock
 					   success:(void (^)(NSDictionary *taskInfo))success
 					   failure:(void (^)(NSError *error))failure;
+
+- (void)startTaskWithPath:(NSString *)path
+    imageData:(NSData *)imageData
+    withParams:(NSDictionary *)processingParams
+    progressBlock:(void (^)(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite))progressBlock
+    success:(void (^)(NSDictionary *taskInfo))success
+    failure:(void (^)(NSError *error))failure;
+
 /**
  Retrives the image processing task info.
  
