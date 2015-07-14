@@ -165,7 +165,7 @@ static NSString *const kOCRSDKInstallationActivated = @"com.abbyy.ocrsdk.install
     //	NSMutableURLRequest *request = [self requestWithMethod:@"GET" path:path parameters:processingParams];
 
     // AFN2
-    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"GET" URLString:path parameters:processingParams error:nil];
+    NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:@"GET" URLString:[self.baseURL URLByAppendingPathComponent:path].absoluteString parameters:processingParams error:nil];
 
     [request setHTTPMethod:@"POST"];
     [request setValue:@"applicaton/octet-stream" forHTTPHeaderField:@"Content-Type"];
