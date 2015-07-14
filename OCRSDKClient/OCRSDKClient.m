@@ -72,8 +72,9 @@ static NSString *const kOCRSDKInstallationActivated = @"com.abbyy.ocrsdk.install
         //		[self setDefaultHeader:@"Accept" value:@"application/xml"];
 
         // AFN 2
-        self.shouldUseCredentialStorage = YES;
         [self.requestSerializer setValue:@"application/xml" forHTTPHeaderField:@"Accept"];
+        [self.requestSerializer setAuthorizationHeaderFieldWithUsername:self.applicationId password:self.password];
+
         self.responseSerializer = [AFHTTPResponseSerializer serializer];
     }
 
@@ -95,10 +96,7 @@ static NSString *const kOCRSDKInstallationActivated = @"com.abbyy.ocrsdk.install
         //		[self setAuthorizationHeaderWithUsername:self.applicationId password:self.password];
 
         // AFN 2
-        NSURLCredential *credential = [NSURLCredential credentialWithUser:self.applicationId password:self.password persistence:NSURLCredentialPersistenceNone];
-        [self setCredential:credential];
-
-
+        [self updateAuthorizationHeader];
 
         // AFN 1
         //		[self getPath:@"activateNewInstallation" parameters:@{@"deviceId": deviceId} success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -189,7 +187,7 @@ static NSString *const kOCRSDKInstallationActivated = @"com.abbyy.ocrsdk.install
         }
     }];
 
-    operation.credential = self.credential;
+    operation.credential = [[NSURLCredential alloc] initWithUser:self.applicationId password:self.password persistence:NSURLCredentialPersistenceNone];
     [operation setUploadProgressBlock:progressBlock];
 
     // AFN 1
@@ -286,11 +284,9 @@ static NSString *const kOCRSDKInstallationActivated = @"com.abbyy.ocrsdk.install
 //        password:self.password];
 
     // AFN 2
-    NSURLCredential *credential = [NSURLCredential
-        credentialWithUser:self.installationId != nil ? [self.applicationId stringByAppendingString:self.installationId] : self.applicationId
-        password:self.password
-        persistence:NSURLCredentialPersistenceNone];
-    [self setCredential:credential];
+    [self.requestSerializer
+        setAuthorizationHeaderFieldWithUsername:self.installationId != nil ? [self.applicationId stringByAppendingString:self.installationId] : self.applicationId
+        password:self.password];
 }
 
 @end
