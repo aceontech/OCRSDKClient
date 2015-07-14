@@ -72,7 +72,9 @@ static NSString *const kOCRSDKInstallationActivated = @"com.abbyy.ocrsdk.install
         //		[self setDefaultHeader:@"Accept" value:@"application/xml"];
 
         // AFN 2
-        [self.requestSerializer setValue:@"Accept" forHTTPHeaderField:@"application/xml"];
+        self.shouldUseCredentialStorage = YES;
+        [self.requestSerializer setValue:@"application/xml" forHTTPHeaderField:@"Accept"];
+        self.responseSerializer = [AFHTTPResponseSerializer serializer];
     }
 
     return self;
@@ -171,6 +173,7 @@ static NSString *const kOCRSDKInstallationActivated = @"com.abbyy.ocrsdk.install
     [request setValue:@"applicaton/octet-stream" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:imageData];
 
+
     AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
 
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -186,6 +189,7 @@ static NSString *const kOCRSDKInstallationActivated = @"com.abbyy.ocrsdk.install
         }
     }];
 
+    operation.credential = self.credential;
     [operation setUploadProgressBlock:progressBlock];
 
     // AFN 1
@@ -215,6 +219,7 @@ static NSString *const kOCRSDKInstallationActivated = @"com.abbyy.ocrsdk.install
     //	}];
 
     // AFN 2
+    [self updateAuthorizationHeader];
     [self GET:@"getTaskStatus" parameters:@{@"taskId" : taskId} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if (success != nil) {
             NSDictionary *responseDictionary = [NSDictionary dictionaryWithXMLData:responseObject];
