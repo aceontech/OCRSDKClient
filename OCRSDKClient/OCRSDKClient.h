@@ -22,14 +22,14 @@
 
 #import <SystemConfiguration/SystemConfiguration.h>
 #import <MobileCoreServices/MobileCoreServices.h>
-#import "AFHTTPClient.h"
+#import <AFHTTPRequestOperationManager.h>
 
 /**
  `OCRSDKClient` is an `AFHTTPClient` subclass for interacting with the ABBYY Cloud OCR SDK webservice API (http://ocrsdk.com).
  
  See ABBYY Cloud OCR SDK API Reference on http://ocrsdk.com/documentation/apireference.
  */
-@interface OCRSDKClient : AFHTTPClient
+@interface OCRSDKClient : AFHTTPRequestOperationManager
 
 /// @name Accessing HTTP Client Properties
 
